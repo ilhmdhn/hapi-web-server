@@ -1,53 +1,31 @@
-// const routes = [
-//     {
-//         method: 'GET',
-//         path: '/',
-//         handler: (request,  h) => {
-//             return 'Homepage';
-//         },
-//     },
-//     {
-//         method: '*',
-//         path:'/',
-//         handler:(request, h) =>{
-//             return  'Halaman tidak dapat di akses menggunakan method ini';
-//         }
-//     },
-//     {
-//         method: 'GET',
-//         path: '/about',
-//         handler: (request, h) => {
-//             return 'About page';
-//         }
-//     },
-//     {
-//         method: '*',
-//         path: '/about',
-//         handler: (request,h) =>{
-//             return 'Halaman tidak dapat diakses dengan method tersebut';
-//         }
-//     },
-//     {
-//         method: 'GET',
-//         path:'/hello/{name?}',
-//         handler:(request, h) =>{
-//             const {name = "Stranger"} = request.params;
-//             const { lang } = request.query;
+const { addNoteHandler, getAllNotesHandler, getNoteByIdHandler, editNoteByHandler, deleteNoteByIdHandler } = require("./handler");
 
-//             if(lang === 'id'){
-//                 return 'Hai, '+name;
-//             }
+const routes = [
+    {
+        method: 'POST',
+        path:'/notes',
+        handler: addNoteHandler
+    },
+    {
+        method: 'GET',
+        path:'/notes',
+        handler: getAllNotesHandler,
+    },
+    {
+        method: 'GET',
+        path: '/notes/{id}',
+        handler: getNoteByIdHandler,
+    },
+    {
+        method: 'PUT',
+        path: '/notes/{id}',
+        handler: editNoteByHandler,
+    },
+    {
+        method: 'DELETE',
+        path: '/notes/{id}',
+        handler: deleteNoteByIdHandler,
+    },
+];
 
-//             return 'Hello, '+name;
-//         },
-//     },
-//     {
-//         method: '*',
-//         path: '/{any*}',
-//         handler: (request,h) =>{
-//             return 'Halaman tidak ditemukan';
-//         },
-//     },
-// ]
-
-// module.exports = routes;
+module.exports = routes;
